@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/citizens" method="GET">
+        <input type="text" name=lastname placeholder="lastname">
+        <button>Search</button>
+    </form>
+
+    <table border="1">
+
+        {% for citizen in citizens%}
+        <tr>
+            <td>
+                {{ citizen[0] }}
+            </td>
+            <td>
+                {{ citizen[1] }}
+            </td>
+            <td>
+                {{ citizen[2] }}
+            </td>
+            <td>
+                {{ citizen[3] }}
+            </td>
+            <td>
+                {{ citizen[4] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/citizens?limit={{ limit }}&offset={{ nextpage }}">Next</a>
+
+</body>
+
+</html>
