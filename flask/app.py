@@ -7,7 +7,7 @@ conn = sqlite3.connect('citizens.sqlite3', check_same_thread=False)
 cur = conn.cursor()
 
 # cur.execute("""CREATE table citizens (
-#     id int,
+#     id integer,
 #     firsname text,
 #     lastname text,
 #     area text,
@@ -30,17 +30,23 @@ def hello():
 #     cur.execute(f"select * from citizens where id {id} ")
 #     return render_template('citizen.html', citizens=cur.fetchall(), )
 
-
 @app.route('/citizens')
 def citizens():
     lastname = request.values['lastname'] if 'lastname' in request.values else ""
     limit = request.values['limit'] if 'limit' in request.values else 20
     offset = request.values['offset'] if 'offset' in request.values else 0
-    if lastname == "" :  
-        cur.execute(f"select * from citizens limit {limit} offset {offset}")
+    orderby = request.values['orderby'] if 'orderby' in request.values else ""
+    if lastname == "" : 
+        if orderby == "" :
+            cur.execute(f"select * from citizens limit {limit} offset {offset}")
+        else:
+            cur.execute(f"select * from citizens order by lastname limit {limit} offset {offset}")
     else:
-        cur.execute(f"select * from citizens where lastname like '{lastname}' limit {limit} offset {offset}")
-    return render_template('citizens.html', citizens=cur.fetchall(),lastname=lastname ,  limit=limit, nextpage=int(offset) + int(limit))
+        if orderby == "" :
+            cur.execute(f"select * from citizens where lastname like '{lastname}' limit {limit} offset {offset}")
+        else:
+            cur.execute(f"select * from citizens where lastname like '{lastname}' order by lastname limit {limit} offset {offset} ")
+    return render_template('citizens.html', citizens=cur.fetchall(), orderby=orderby, lastname=lastname ,  limit=limit, nextpage=int(offset) + int(limit))
 
 
 if __name__ == '__main__':

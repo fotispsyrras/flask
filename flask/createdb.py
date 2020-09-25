@@ -3,19 +3,19 @@ import requests
 
 from random import randint,choice
 
-connection = sqlite3.connect('fotis.db')
+connection = sqlite3.connect('citizens.sqlite3')
 cur = connection.cursor()
 
-# cur.execute("""CREATE table citizens (
-#     id integer primary key autoincrement,
-#     firstname text,
-#     lastname text,
-#     area text,
-#     discription text  
-# )""")
+cur.execute("""CREATE table citizens (
+    id integer primary key autoincrement,
+    firstname text,
+    lastname text,
+    area text,
+    discription text  
+)""")
 
 
-# connection.commit()
+connection.commit()
 areas=['kriti','thessalia','attiki','makedonia','thraki']
 
 
