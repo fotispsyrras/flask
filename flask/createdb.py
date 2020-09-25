@@ -16,7 +16,7 @@ cur = connection.cursor()
 
 
 # connection.commit()
-areas=['kriti','thessalia','attiki','makedonia','']
+areas=['kriti','thessalia','attiki','makedonia','thraki']
 
 
 url = 'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain'
