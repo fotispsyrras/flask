@@ -21,9 +21,14 @@ areas=['kriti','thessalia','attiki','makedonia','thraki']
 
 url = 'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain'
 
-r = requests.get(url)
+headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'}
+r = requests.get(url,headers=headers)
 text = r.text
 individual_words = text.split()
+print(r,text,individual_words)
+
+
+
 
 for x in range(1,10000001):
     random_number = randint(1,len(individual_words))
